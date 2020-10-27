@@ -1,0 +1,19 @@
+{
+  "name": "blog-list",
+  "version": "1.0.0",
+  "description": "Blog-list backend app, FullStackOpen University of helsinki",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HostXX/Fullstack-open-react-course-2020-v2.git"
+  },
+  "author": "Carlos Garcia",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/HostXX/Fullstack-open-react-course-2020-v2/issues"
+  },
+  "homepage": "https://github.com/HostXX/Fullstack-open-react-course-2020-v2#readme"
+}
