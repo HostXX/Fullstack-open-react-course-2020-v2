@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node index.js",
     "dev": "node nodemon.js",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test": "jest --verbose"
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,7 @@
   "homepage": "https://github.com/HostXX/Fullstack-open-react-course-2020-v2#readme",
   "devDependencies": {
     "eslint": "^7.12.1",
+    "jest": "^26.6.1",
     "nodemon": "^2.0.6"
   },
   "dependencies": {
@@ -27,5 +29,8 @@
     "dotenv": "^8.2.0",
     "mongoose": "^5.10.11",
     "morgan": "^1.10.0"
+  },
+  "jest": {
+    "testEnvironment": "node"
   }
 }
