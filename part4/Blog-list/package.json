@@ -4,7 +4,9 @@
   "description": "Blog-list backend app, FullStackOpen University of helsinki",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "dev": "node nodemon.js",
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",
@@ -15,5 +17,15 @@
   "bugs": {
     "url": "https://github.com/HostXX/Fullstack-open-react-course-2020-v2/issues"
   },
-  "homepage": "https://github.com/HostXX/Fullstack-open-react-course-2020-v2#readme"
+  "homepage": "https://github.com/HostXX/Fullstack-open-react-course-2020-v2#readme",
+  "devDependencies": {
+    "eslint": "^7.12.1",
+    "nodemon": "^2.0.6"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "mongoose": "^5.10.11",
+    "morgan": "^1.10.0"
+  }
 }
