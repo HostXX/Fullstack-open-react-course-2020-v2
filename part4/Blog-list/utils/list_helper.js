@@ -1,9 +1,15 @@
+const totalLikes = blogs => {
+	const reducer = (acc, blog) => {
+		return acc + blog.likes
+	}
 
-const dummy = (blogs) => {
-	return 1
+	const total = blogs.reduce(reducer, 0)
+
+	return total
 }
 
+totalLikes([])
 
 module.exports = {
-	dummy
+	totalLikes
 }
