@@ -74,6 +74,17 @@ describe("Blogs API", () => {
     
 		expect(recentlyAdded[0].likes).toBe(0)
 	})
+    
+	test("if no title and url property in blog respond with 400 bad request status", async () => {
+		const newBlog= 	{
+			author: "Eldish",
+			likes:2
+		}
+		await api
+			.post("/api/v1/blog")
+			.send(newBlog)
+			.expect(400)
+	})
         
         
 	afterAll(async() => {

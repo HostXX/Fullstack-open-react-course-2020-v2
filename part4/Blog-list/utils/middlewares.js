@@ -10,6 +10,12 @@ const errorHandler = (err, req, res,next) => {
 			stack: config.MODE === "development" ? err.stack : {}
 		})
 	}
+
+	if (err.name === "ValidationError") {
+		res.status(400)
+		return res.json({ error: err.message })
+	}
+
     
 	// res.status(err.status || 500)
 	// return res.json({
