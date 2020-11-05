@@ -31,6 +31,15 @@ describe("Blogs API", () => {
 		expect(allBlogs.body).toHaveLength(testHelpers.initialBlogs.length)
 	})
     
+	test("blogs must have the id property",async() => {
+		const allBlogs = await api.get("/api/v1/blog")
+        
+		await allBlogs.body.forEach(blog => {
+			expect(blog.id).toBeDefined()
+		})
+	})
+    
+    
 	afterAll(() => {
 		mongoose.connection.close()
 	})
