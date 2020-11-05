@@ -22,3 +22,6 @@ DELETE http://localhost:3001/api/v1/blog/5fa36089b9984147019f986b HTTP/1.1
 
 ############
 
+PUT http://localhost:3001/api/v1/blog/5fa36bbabe83b75c80402a40 HTTP/1.1
+
+############

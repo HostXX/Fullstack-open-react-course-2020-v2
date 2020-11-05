@@ -96,6 +96,20 @@ describe("Blogs API", () => {
 		const blogsAfterDeletion = await testHelpers.blogsInDb()
 		expect(blogsInDb.length - 1).toBe(blogsAfterDeletion.length)
 	})
+    
+	test.only("a blog can be modified adding a like", async () => {
+		const blogsInDb = await testHelpers.blogsInDb()
+		const blogToBeModified = blogsInDb[0]
+
+		await api
+			.put(`/api/v1/blog/${blogToBeModified.id}`)
+			.expect(200)
+            
+		const blogsAfterModification = await testHelpers.blogsInDb()
+		const modifiedBlog = blogsAfterModification.filter((blog)=> blog.id === blogToBeModified.id )
+        
+		expect(blogToBeModified.likes + 1).toBe(modifiedBlog[0].likes)
+	})
         
 	afterAll(async() => {
 		await Blog.deleteMany({})

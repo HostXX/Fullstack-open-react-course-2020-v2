@@ -16,6 +16,12 @@ const errorHandler = (err, req, res,next) => {
 		return res.json({ error: err.message })
 	}
 
+	if (err.name === "CastError") {
+		res.status(400)
+		return res.json({ error: "Error with resource"})
+	}
+
+	
     
 	// res.status(err.status || 500)
 	// return res.json({
