@@ -45,10 +45,10 @@ blogRoutes.delete("/:id", async (req, res) => {
 
 blogRoutes.put("/:id", async (req, res) => {
 	const id = req.params.id
-	const updatedNote = await Blog.findByIdAndUpdate(id, {$inc: { likes: 1 }} , {
+	const updatedBlog = await Blog.findByIdAndUpdate(id, {$inc: { likes: 1 }} , {
 		new: true,
 	})
-	res.status(200).json(updatedNote)
+	res.status(200).json(updatedBlog)
 })
 
 module.exports = blogRoutes
