@@ -86,7 +86,6 @@ describe("Blogs API", () => {
 			.expect(400)
 	})
         
-        
 	afterAll(async() => {
 		await Blog.deleteMany({})
 		mongoose.connection.close()
