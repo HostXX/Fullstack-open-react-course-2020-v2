@@ -5,6 +5,7 @@ const blogRoutes = require("./controllers/blogs")
 const middlewares = require("./utils/middlewares")
 
 const app = express()
+require("./DbConnection")
 
 app.use(express.static("build"))
 app.use(cors())

@@ -4,10 +4,10 @@
   "description": "Blog-list backend app, FullStackOpen University of helsinki",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "node nodemon.js",
+    "start": "cross-env NODE_ENV=production node index.js",
+    "dev": "cross-env NODE_ENV=development node nodemon.js",
     "lint": "eslint .",
-    "test": "jest --verbose"
+    "test": "cross-env NODE_ENV=test jest --verbose --runInBand"
   },
   "repository": {
     "type": "git",
@@ -20,17 +20,17 @@
   },
   "homepage": "https://github.com/HostXX/Fullstack-open-react-course-2020-v2#readme",
   "devDependencies": {
+    "cross-env": "^7.0.2",
     "eslint": "^7.12.1",
     "jest": "^26.6.1",
-    "nodemon": "^2.0.6"
+    "nodemon": "^2.0.6",
+    "supertest": "^6.0.0"
   },
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
+    "express-async-errors": "^3.1.1",
     "mongoose": "^5.10.11",
     "morgan": "^1.10.0"
-  },
-  "jest": {
-    "testEnvironment": "node"
   }
 }
