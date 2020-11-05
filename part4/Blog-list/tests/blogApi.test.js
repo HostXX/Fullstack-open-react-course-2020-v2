@@ -54,6 +54,27 @@ describe("Blogs API", () => {
 		expect(blogsAfrterAddition).toHaveLength(testHelpers.initialBlogs.length + 1)
 		expect(titles).toContain("El nuevo blog")
 	})
+    
+	test("if no like property in blog default to 0", async () => {
+		const newBlog= 	{
+			title: "Sin like property",
+			author: "Eldish",
+			url: "https://detailed.com/tech-blogs/"
+		}
+    
+		await api
+			.post("/api/v1/blog")
+			.send(newBlog)
+			.expect(201)
+			.expect("Content-Type", /application\/json/)
+    
+		const blogsAfrterAddition = await testHelpers.blogsInDb()
+    
+		const recentlyAdded = blogsAfrterAddition.filter(r => r.title === "Sin like property")
+    
+		expect(recentlyAdded[0].likes).toBe(0)
+	})
+        
         
 	afterAll(async() => {
 		await Blog.deleteMany({})

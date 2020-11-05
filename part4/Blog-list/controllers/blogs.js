@@ -8,7 +8,16 @@ blogRoutes.get("/",async(req, res) => {
 })
   
 blogRoutes.post("/", async(req, res) => {
-	const blog = new Blog(req.body)
+	const body = req.body
+
+	const newBlog = {
+		title: body.title,
+		author: body.author,
+		url: body.url,
+		likes: body.likes ? body.likes : 0
+	}
+
+	const blog = new Blog(newBlog)
 	const result = await blog.save()
 
 	res.status(201).json(result)
