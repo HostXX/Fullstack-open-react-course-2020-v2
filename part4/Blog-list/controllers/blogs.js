@@ -23,5 +23,29 @@ blogRoutes.post("/", async(req, res) => {
 	res.status(201).json(result)
 })
 
+blogRoutes.get("/:id", async (req, res) => {
+	const id = req.params.id
+	const blog = await Blog.findById(id)
+
+	if (blog) {
+		return res.json({
+			blog
+		})
+	}else {
+		return res.status(400).json({
+			message : "Not found"
+		})
+	}
+	
+
+})
+
+blogRoutes.delete("/:id", async (req, res) => {
+	const id = req.params.id
+	await Blog.findByIdAndRemove(id)
+	res.status(204).end()
+})
+
+
 
 module.exports = blogRoutes

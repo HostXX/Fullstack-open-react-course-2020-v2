@@ -85,6 +85,17 @@ describe("Blogs API", () => {
 			.send(newBlog)
 			.expect(400)
 	})
+    
+	test("a blog can be deleted", async () => {
+		const blogsInDb = await testHelpers.blogsInDb()
+		const blogToBeDeleted = blogsInDb[0]
+		await api
+			.delete(`/api/v1/blog/${blogToBeDeleted.id}`)
+			.expect(204)
+            
+		const blogsAfterDeletion = await testHelpers.blogsInDb()
+		expect(blogsInDb.length - 1).toBe(blogsAfterDeletion.length)
+	})
         
 	afterAll(async() => {
 		await Blog.deleteMany({})

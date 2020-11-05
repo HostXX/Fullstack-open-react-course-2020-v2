@@ -13,6 +13,12 @@ Content-Type: application/json
 	}
 ############
 
-GET http://localhost:3001/api/v1/blog/5f9481057e16bed157b1740c HTTP/1.1
+GET http://localhost:3001/api/v1/blog/5fa36089b9984147019f986b HTTP/1.1
 
 ############
+
+
+DELETE http://localhost:3001/api/v1/blog/5fa36089b9984147019f986b HTTP/1.1
+
+############
+
