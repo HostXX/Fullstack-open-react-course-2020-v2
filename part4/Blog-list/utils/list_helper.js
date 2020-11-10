@@ -115,20 +115,22 @@ const mostLikes = (blogs) => {
 	} else {
 		return blogs.reduce((acc, blog) => {
 			if (blog.likes >= acc.likes) {
-				acc["author"] = blog.author
-				acc["likes"] = blog.likes
+				acc['author'] = blog.author
+				acc['likes'] = blog.likes
 			}
 			return acc
 		},{
-			author:"",
+			author:'',
 			likes:0
 		})
 	}
 }
 
+
+
 module.exports = {
 	totalLikes,
 	favoriteBlog,
 	mostBlogs,
-	mostLikes
+	mostLikes,
 }

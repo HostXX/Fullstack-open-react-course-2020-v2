@@ -1,12 +1,12 @@
-const blogRoutes = require("express").Router()
-const Blog = require("../models/blog")
+const blogRoutes = require('express').Router()
+const Blog = require('../models/blog')
 
-blogRoutes.get("/", async (req, res) => {
+blogRoutes.get('/', async (req, res) => {
 	const blogs = await Blog.find({})
 	res.json(blogs)
 })
 
-blogRoutes.post("/", async (req, res) => {
+blogRoutes.post('/', async (req, res) => {
 	const body = req.body
 
 	const newBlog = {
@@ -22,7 +22,7 @@ blogRoutes.post("/", async (req, res) => {
 	res.status(201).json(result)
 })
 
-blogRoutes.get("/:id", async (req, res) => {
+blogRoutes.get('/:id', async (req, res) => {
 	const id = req.params.id
 	const blog = await Blog.findById(id)
 
@@ -32,22 +32,26 @@ blogRoutes.get("/:id", async (req, res) => {
 		})
 	} else {
 		return res.status(400).json({
-			message: "Not found"
+			message: 'Not found'
 		})
 	}
 })
 
-blogRoutes.delete("/:id", async (req, res) => {
+blogRoutes.delete('/:id', async (req, res) => {
 	const id = req.params.id
 	await Blog.findByIdAndRemove(id)
 	res.status(204).end()
 })
 
-blogRoutes.put("/:id", async (req, res) => {
+blogRoutes.put('/:id', async (req, res) => {
 	const id = req.params.id
-	const updatedBlog = await Blog.findByIdAndUpdate(id, {$inc: { likes: 1 }} , {
-		new: true,
-	})
+	const updatedBlog = await Blog.findByIdAndUpdate(
+		id,
+		{ $inc: { likes: 1 } },
+		{
+			new: true
+		}
+	)
 	res.status(200).json(updatedBlog)
 })
 

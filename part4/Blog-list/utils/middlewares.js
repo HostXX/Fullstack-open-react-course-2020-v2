@@ -1,28 +1,26 @@
-const config = require("./config")
+const config = require('./config')
 
-const errorHandler = (err, req, res,next) => {
-	if (err instanceof SyntaxError && err.status === 400 && "body" in err) {
+const errorHandler = (err, req, res, next) => {
+	if (err instanceof SyntaxError && err.status === 400 && 'body' in err) {
 		res.status(400)
 		console.log(config.MODE)
 
 		res.json({
-			message: "Something broke with the json parser!",
-			stack: config.MODE === "development" ? err.stack : {}
+			message: 'Something broke with the json parser!',
+			stack: config.MODE === 'development' ? err.stack : {}
 		})
 	}
 
-	if (err.name === "ValidationError") {
+	if (err.name === 'ValidationError') {
 		res.status(400)
 		return res.json({ error: err.message })
 	}
 
-	if (err.name === "CastError") {
+	if (err.name === 'CastError') {
 		res.status(400)
-		return res.json({ error: "Error with resource"})
+		return res.json({ error: 'Error with resource' })
 	}
 
-	
-    
 	// res.status(err.status || 500)
 	// return res.json({
 	//     message: "Something broke!",
@@ -33,7 +31,7 @@ const errorHandler = (err, req, res,next) => {
 }
 
 const notFoundHandler = (req, res) => {
-	res.status(404).send({ error: "unknown endpoint" })
+	res.status(404).send({ error: 'unknown endpoint' })
 }
 
 module.exports = {

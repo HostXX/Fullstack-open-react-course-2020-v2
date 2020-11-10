@@ -1,14 +1,16 @@
-const express = require("express")
-require("express-async-errors")
-const cors = require("cors")
-const morgan = require("morgan")
-const blogRoutes = require("./controllers/blogs")
-const middlewares = require("./utils/middlewares")
+const express = require('express')
+require('express-async-errors')
+const cors = require('cors')
+const morgan = require('morgan')
+const blogRoutes = require('./controllers/blogs')
+const userRoutes = require('./controllers/users')
+
+const middlewares = require('./utils/middlewares')
 
 const app = express()
-require("./DbConnection")
+require('./DbConnection')
 
-app.use(express.static("build"))
+app.use(express.static('build'))
 app.use(cors())
 app.use(express.json())
 app.use(
@@ -17,26 +19,25 @@ app.use(
 			tokens.method(req, res),
 			tokens.url(req, res),
 			tokens.status(req, res),
-			tokens.res(req, res, "content-length"),
-			"-",
-			tokens["response-time"](req, res),
-			"ms",
-			tokens.method(req, res) === "POST" ? JSON.stringify(req.body) : ""
-		].join(" ")
+			tokens.res(req, res, 'content-length'),
+			'-',
+			tokens['response-time'](req, res),
+			'ms',
+			tokens.method(req, res) === 'POST' ? JSON.stringify(req.body) : ''
+		].join(' ')
 	})
 )
 
-app.get("/",(req,res) => {
+app.get('/', (req, res) => {
 	res.json({
-		message : "Welcome to root"
+		message: 'Welcome to root'
 	})
 })
 
-app.use("/api/v1/blog",blogRoutes)
+app.use('/api/v1/user', userRoutes)
+app.use('/api/v1/blog', blogRoutes)
 
 app.use(middlewares.notFoundHandler)
 app.use(middlewares.errorHandler)
-
-
 
 module.exports = app
