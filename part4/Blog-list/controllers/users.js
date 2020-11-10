@@ -3,7 +3,7 @@ const usersRouter = require('express').Router()
 const User = require('../models/user')
 
 usersRouter.get('/', async (req, res) => {
-	const users = await User.find({}).populate('Blog')
+	const users = await User.find({}).populate('blogs',{title : 1, author: 1, url: 1 })
 	res.json(users)
 })
 
@@ -30,11 +30,11 @@ usersRouter.post('/', async (req, res) => {
 	return res.json(savedUser)
 })
 
-// usersRouter.delete('/:id', async (req, res) => {
-// 	const id = req.params.id
+usersRouter.delete('/:id', async (req, res) => {
+	const id = req.params.id
 
-// 	await User.findByIdAndRemove(id)
-// 	res.status(204).end()
-// })
+	await User.findByIdAndRemove(id)
+	res.status(204).end()
+})
 
 module.exports = usersRouter
