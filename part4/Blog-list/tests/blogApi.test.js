@@ -6,10 +6,28 @@ const testHelpers = require('./test_helpers')
 const api = supertest(app)
 
 const Blog = require('../models/blog')
+const User = require('../models/user')
+
+
 
 describe('Blogs API', () => {
 	beforeEach(async () => {
 		await Blog.deleteMany({})
+		await User.deleteMany({})
+
+		const newUser = {
+			_id : '5fac6f9e38033949392d3e8b',
+			username: 'test user',
+			name: 'ayy',
+			password: 'aaaaaa',
+			blogs:['5fac71a4517c814bfe8fdcfc','5fac718b109d384ba75194a5']
+		}
+
+
+		const user = await new User(newUser)
+		await user.save()
+		
+		console.log('el id del user',user.id)
 
 		const BlogObjects = testHelpers.initialBlogs.map(blog => new Blog(blog))
 		const promiseArray = BlogObjects.map(blog => blog.save())
@@ -17,12 +35,22 @@ describe('Blogs API', () => {
 	})
 
 	test('correct number of blogs are returned', async () => {
-		const allBlogs = await api.get('/api/v1/blog')
+		const allBlogs = await api
+			.get('/api/v1/blog')
+			.set({
+				Authorization:
+					'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QgdXNlciIsImlkIjoiNWZhYzZmOWUzODAzMzk0OTM5MmQzZThiIiwiaWF0IjoxNjA1MTM2MzIzfQ.JqH8oqfmdsWH_CdZiGwBgbPmGea4AUuMHZ4ZGLoy20A'
+			})
 		expect(allBlogs.body).toHaveLength(testHelpers.initialBlogs.length)
 	})
 
 	test('blogs must have the id property', async () => {
-		const allBlogs = await api.get('/api/v1/blog')
+		const allBlogs = await api
+			.get('/api/v1/blog')
+			.set({
+				Authorization:
+					'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QgdXNlciIsImlkIjoiNWZhYzZmOWUzODAzMzk0OTM5MmQzZThiIiwiaWF0IjoxNjA1MTM2MzIzfQ.JqH8oqfmdsWH_CdZiGwBgbPmGea4AUuMHZ4ZGLoy20A'
+			})
 
 		allBlogs.body.forEach(blog => {
 			expect(blog.id).toBeDefined()
@@ -40,6 +68,10 @@ describe('Blogs API', () => {
 		await api
 			.post('/api/v1/blog')
 			.send(newBlog)
+			.set({
+				Authorization:
+					'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QgdXNlciIsImlkIjoiNWZhYzZmOWUzODAzMzk0OTM5MmQzZThiIiwiaWF0IjoxNjA1MTM2MzIzfQ.JqH8oqfmdsWH_CdZiGwBgbPmGea4AUuMHZ4ZGLoy20A'
+			})
 			.expect(201)
 			.expect('Content-Type', /application\/json/)
 
@@ -53,6 +85,20 @@ describe('Blogs API', () => {
 		expect(titles).toContain('El nuevo blog')
 	})
 
+	test('adding a blog fails if no token is present', async () => {
+		const newBlog = {
+			title: 'El nuevo blog',
+			author: 'Eldish',
+			url: 'https://detailed.com/tech-blogs/',
+			likes: 16
+		}
+
+		await api
+			.post('/api/v1/blog')
+			.send(newBlog)
+			.expect(401)
+	})
+
 	test('if no like property in blog default to 0', async () => {
 		const newBlog = {
 			title: 'Sin like property',
@@ -63,6 +109,10 @@ describe('Blogs API', () => {
 		await api
 			.post('/api/v1/blog')
 			.send(newBlog)
+			.set({
+				Authorization:
+					'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QgdXNlciIsImlkIjoiNWZhYzZmOWUzODAzMzk0OTM5MmQzZThiIiwiaWF0IjoxNjA1MTM2MzIzfQ.JqH8oqfmdsWH_CdZiGwBgbPmGea4AUuMHZ4ZGLoy20A'
+			})
 			.expect(201)
 			.expect('Content-Type', /application\/json/)
 
@@ -83,23 +133,36 @@ describe('Blogs API', () => {
 		await api
 			.post('/api/v1/blog')
 			.send(newBlog)
+			.set({
+				Authorization:
+					'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QgdXNlciIsImlkIjoiNWZhYzZmOWUzODAzMzk0OTM5MmQzZThiIiwiaWF0IjoxNjA1MTM2MzIzfQ.JqH8oqfmdsWH_CdZiGwBgbPmGea4AUuMHZ4ZGLoy20A'
+			})
 			.expect(400)
 	})
 
 	test('a blog can be deleted', async () => {
 		const blogsInDb = await testHelpers.blogsInDb()
 		const blogToBeDeleted = blogsInDb[0]
-		await api.delete(`/api/v1/blog/${blogToBeDeleted.id}`).expect(204)
+		await api.delete(`/api/v1/blog/${blogToBeDeleted.id}`).expect(204).set({
+			Authorization:
+				'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QgdXNlciIsImlkIjoiNWZhYzZmOWUzODAzMzk0OTM5MmQzZThiIiwiaWF0IjoxNjA1MTM2MzIzfQ.JqH8oqfmdsWH_CdZiGwBgbPmGea4AUuMHZ4ZGLoy20A'
+		})
 
 		const blogsAfterDeletion = await testHelpers.blogsInDb()
 		expect(blogsInDb.length - 1).toBe(blogsAfterDeletion.length)
 	})
 
-	test.only('a blog can be modified adding a like', async () => {
+	test('a blog can be modified adding a like', async () => {
 		const blogsInDb = await testHelpers.blogsInDb()
 		const blogToBeModified = blogsInDb[0]
 
-		await api.put(`/api/v1/blog/${blogToBeModified.id}`).expect(200)
+		await api
+			.put(`/api/v1/blog/${blogToBeModified.id}`)
+			.expect(200)
+			.set({
+				Authorization:
+					'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QgdXNlciIsImlkIjoiNWZhYzZmOWUzODAzMzk0OTM5MmQzZThiIiwiaWF0IjoxNjA1MTM2MzIzfQ.JqH8oqfmdsWH_CdZiGwBgbPmGea4AUuMHZ4ZGLoy20A'
+			})
 
 		const blogsAfterModification = await testHelpers.blogsInDb()
 		const modifiedBlog = blogsAfterModification.filter(

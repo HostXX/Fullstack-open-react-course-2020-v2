@@ -42,7 +42,7 @@ const errorHandler = (err, req, res, next) => {
 	}
 
 	if (err.name === 'AuthError') {
-		res.status(400)
+		res.status(401)
 		return res.json({
 			error: err.message,
 			stack: config.MODE === 'development' ? err.stack : {}

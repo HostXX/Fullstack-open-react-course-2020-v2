@@ -37,7 +37,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/v1/login',loginRouter)
 app.use('/api/v1/user', userRoutes)
-app.use('/api/v1/blog',middlewares.tokenHandler, blogRoutes)
+app.use('/api/v1/blog', blogRoutes)
 
 app.use(middlewares.notFoundHandler)
 app.use(middlewares.errorHandler)

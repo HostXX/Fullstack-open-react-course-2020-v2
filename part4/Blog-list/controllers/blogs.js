@@ -4,15 +4,14 @@ const User = require('../models/user')
 
 const middlewares = require('../utils/middlewares')
 
-blogRoutes.get('/', async (req, res) => {
+blogRoutes.get('/',middlewares.tokenHandler, async (req, res) => {
 	const blogs = await Blog.find({}).populate('user', { username: 1, name: 1 })
 	res.json(blogs)
 })
 
-blogRoutes.post('/', async (req, res) => {
+blogRoutes.post('/',middlewares.tokenHandler, async (req, res) => {
 	const body = req.body
 	const user = await User.findById(req.user.id)
-	console.log('blog creation route', req.user)
 
 	const newBlog = {
 		title: body.title,
@@ -32,7 +31,7 @@ blogRoutes.post('/', async (req, res) => {
 	res.status(201).json(result)
 })
 
-blogRoutes.get('/:id', async (req, res) => {
+blogRoutes.get('/:id',middlewares.tokenHandler, async (req, res) => {
 	const id = req.params.id
 	const blog = await Blog.findById(id)
 
@@ -64,7 +63,7 @@ blogRoutes.delete('/:id', middlewares.tokenHandler, async (req, res) => {
 	}
 })
 
-blogRoutes.put('/:id', async (req, res) => {
+blogRoutes.put('/:id',middlewares.tokenHandler, async (req, res) => {
 	const id = req.params.id
 	const updatedBlog = await Blog.findByIdAndUpdate(
 		id,
