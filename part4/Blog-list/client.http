@@ -3,25 +3,28 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImVsI
 ############
 
 POST http://localhost:3001/api/v1/blog HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImVsIGd1YSIsImlkIjoiNWZhYzVjYjllYzVkNzgzMjNjYjQwMDkwIiwiaWF0IjoxNjA1MTMxODU3fQ.1IRXvn_L65BdEQPqY-soJlC7eYliOZYOL-Cw_sUDbNU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QgZGVsZXRpb25zIiwiaWQiOiI1ZmFjNjU1MzQ0ZDdlYzNlMTQwMDIwNWYiLCJpYXQiOjE2MDUxMzM2NzR9.meM2gEL_Hdr0jx_fmqUvNxOShPJIAIWrzhkLPo6YN34
 Content-Type: application/json
 
 {
-    "title": "test post",
+    "title": "test deletion2",
 	"author": "el billy janir",
 	"url": "https://billDestiny.com/mind-blogs/",
 	"likes" : 15
 	}
 ############
-
+5fac5cb9ec5d78323cb40090 user
+5fac62cdb92bd83b3cdf8d73 blog
 GET http://localhost:3001/api/v1/blog/5fa36089b9984147019f986b HTTP/1.1
 
 ############
 
 
-DELETE http://localhost:3001/api/v1/blog/5faa08bc929442cc99b549a7 HTTP/1.1
+DELETE http://localhost:3001/api/v1/blog/5fac658844d7ec3e14002061 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QgZGVsZXRpb25zIiwiaWQiOiI1ZmFjNjU1MzQ0ZDdlYzNlMTQwMDIwNWYiLCJpYXQiOjE2MDUxMzM2NzR9.meM2gEL_Hdr0jx_fmqUvNxOShPJIAIWrzhkLPo6YN34
 
-
+5fac658844d7ec3e14002061
+5fac657f44d7ec3e14002060
 ############
 
 PUT http://localhost:3001/api/v1/blog/5fa36bbabe83b75c80402a40 HTTP/1.1
@@ -33,7 +36,7 @@ GET http://localhost:3001/api/v1/user HTTP/1.1
 
 ############
 
-DELETE  http://localhost:3001/api/v1/user/5faa076668aa2cca8f97dc21 HTTP/1.1
+DELETE http://localhost:3001/api/v1/user/5faa076668aa2cca8f97dc21 HTTP/1.1
 
 
 ############
@@ -42,9 +45,9 @@ POST http://localhost:3001/api/v1/user HTTP/1.1
 Content-Type: application/json
 
 {
-    "username": "el sesh",
+    "username": "test deletions",
     "name": "ayy",
-    "password" : "22ss"
+    "password" : "aaaaaa"
 }
 
 
@@ -52,12 +55,11 @@ Content-Type: application/json
 
 
 POST http://localhost:3001/api/v1/login HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImVsIGd1YSIsImlkIjoiNWZhYzVjYjllYzVkNzgzMjNjYjQwMDkwIiwiaWF0IjoxNjA1MTMxODU3fQ.1IRXvn_L65BdEQPqY-soJlC7eYliOZYOL-Cw_sUDbNU
 Content-Type: application/json
 
 {
-    "username": "el gua",
-    "password" : "22ss"
+    "username": "test deletions",
+    "password" : "aaaaaa"
 }
 
 

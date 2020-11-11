@@ -4,7 +4,6 @@ const User = require('../models/user')
 
 const middlewares = require('../utils/middlewares')
 
-
 blogRoutes.get('/', async (req, res) => {
 	const blogs = await Blog.find({}).populate('user', { username: 1, name: 1 })
 	res.json(blogs)
@@ -12,9 +11,9 @@ blogRoutes.get('/', async (req, res) => {
 
 blogRoutes.post('/', async (req, res) => {
 	const body = req.body
-	const user =  await User.findById(req.user.id)
-	console.log('blog creation route',req.user)
-	
+	const user = await User.findById(req.user.id)
+	console.log('blog creation route', req.user)
+
 	const newBlog = {
 		title: body.title,
 		author: body.author,
@@ -48,10 +47,21 @@ blogRoutes.get('/:id', async (req, res) => {
 	}
 })
 
-blogRoutes.delete('/:id', async (req, res) => {
-	const id = req.params.id
-	await Blog.findByIdAndRemove(id)
-	res.status(204).end()
+blogRoutes.delete('/:id', middlewares.tokenHandler, async (req, res) => {
+	const blogId = req.params.id
+	const userId = req.user.id
+
+	const user = await User.findById(userId)
+
+	if (user.blogs.includes(blogId)) {
+		await Blog.findByIdAndRemove(blogId)
+		return res.status(204).end()
+	} else {
+		throw {
+			name: 'AuthError',
+			message: 'Invalid user attempting to delete the blog'
+		}
+	}
 })
 
 blogRoutes.put('/:id', async (req, res) => {
