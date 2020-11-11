@@ -1,5 +1,5 @@
-const mongoose = require("mongoose")
-const config = require("./utils/config")
+const mongoose = require('mongoose')
+const config = require('./utils/config')
 
 module.exports = mongoose
 	.connect(config.MONGO_URL, {
@@ -9,9 +9,9 @@ module.exports = mongoose
 		useCreateIndex: true
 	})
 	.then(() => {
-		console.log("connected to MongoDB")
+		console.log('connected to MongoDB')
 	})
 	.catch(error => {
-		console.log("error connecting to MongoDB:", error.message)
+		console.log('error connecting to MongoDB:', error.message)
 	})
 
