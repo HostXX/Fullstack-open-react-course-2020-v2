@@ -1,12 +1,13 @@
 GET http://localhost:3001/api/v1/blog HTTP/1.1
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImVsIGd1YSIsImlkIjoiNWZhYzVjYjllYzVkNzgzMjNjYjQwMDkwIiwiaWF0IjoxNjA1MTMxODU3fQ.1IRXvn_L65BdEQPqY-soJlC7eYliOZYOL-Cw_sUDbNU
 ############
 
 POST http://localhost:3001/api/v1/blog HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImVsIGd1YSIsImlkIjoiNWZhYzVjYjllYzVkNzgzMjNjYjQwMDkwIiwiaWF0IjoxNjA1MTMxODU3fQ.1IRXvn_L65BdEQPqY-soJlC7eYliOZYOL-Cw_sUDbNU
 Content-Type: application/json
 
 {
-    "title": "klk se dice aqui e.",
+    "title": "test post",
 	"author": "el billy janir",
 	"url": "https://billDestiny.com/mind-blogs/",
 	"likes" : 15
@@ -41,9 +42,23 @@ POST http://localhost:3001/api/v1/user HTTP/1.1
 Content-Type: application/json
 
 {
-    "username": "el billy",
+    "username": "el sesh",
     "name": "ayy",
     "password" : "22ss"
 }
+
+
+##########
+
+
+POST http://localhost:3001/api/v1/login HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImVsIGd1YSIsImlkIjoiNWZhYzVjYjllYzVkNzgzMjNjYjQwMDkwIiwiaWF0IjoxNjA1MTMxODU3fQ.1IRXvn_L65BdEQPqY-soJlC7eYliOZYOL-Cw_sUDbNU
+Content-Type: application/json
+
+{
+    "username": "el gua",
+    "password" : "22ss"
+}
+
 
 
