@@ -41,6 +41,7 @@ describe('Blogs API', () => {
 				Authorization:
 					'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QgdXNlciIsImlkIjoiNWZhYzZmOWUzODAzMzk0OTM5MmQzZThiIiwiaWF0IjoxNjA1MTM2MzIzfQ.JqH8oqfmdsWH_CdZiGwBgbPmGea4AUuMHZ4ZGLoy20A'
 			})
+			.expect('Content-Type', /application\/json/)
 		expect(allBlogs.body).toHaveLength(testHelpers.initialBlogs.length)
 	})
 
@@ -51,6 +52,7 @@ describe('Blogs API', () => {
 				Authorization:
 					'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QgdXNlciIsImlkIjoiNWZhYzZmOWUzODAzMzk0OTM5MmQzZThiIiwiaWF0IjoxNjA1MTM2MzIzfQ.JqH8oqfmdsWH_CdZiGwBgbPmGea4AUuMHZ4ZGLoy20A'
 			})
+			.expect('Content-Type', /application\/json/)
 
 		allBlogs.body.forEach(blog => {
 			expect(blog.id).toBeDefined()
@@ -97,6 +99,7 @@ describe('Blogs API', () => {
 			.post('/api/v1/blog')
 			.send(newBlog)
 			.expect(401)
+			.expect('Content-Type', /application\/json/)
 	})
 
 	test('if no like property in blog default to 0', async () => {
@@ -114,7 +117,6 @@ describe('Blogs API', () => {
 					'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QgdXNlciIsImlkIjoiNWZhYzZmOWUzODAzMzk0OTM5MmQzZThiIiwiaWF0IjoxNjA1MTM2MzIzfQ.JqH8oqfmdsWH_CdZiGwBgbPmGea4AUuMHZ4ZGLoy20A'
 			})
 			.expect(201)
-			.expect('Content-Type', /application\/json/)
 
 		const blogsAfrterAddition = await testHelpers.blogsInDb()
 
