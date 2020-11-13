@@ -49,6 +49,14 @@ const errorHandler = (err, req, res, next) => {
 		})
 	}
 
+	if (err.name === 'MongooseServerSelectionError') {
+		res.status(500)
+		return res.json({
+			error: err.message,
+			stack: config.MODE === 'development' ? err.stack : {}
+		})
+	}
+
 	res.status(err.status || 500)
 	res.json({
 		name: err.name,
