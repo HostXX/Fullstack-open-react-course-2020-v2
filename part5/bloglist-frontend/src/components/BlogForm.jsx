@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import blogServices from '../services/blogServices'
 
-const BlogForm = ({ setErrorMessage, setBlogs }) => {
+const BlogForm = ({ setErrorMessage, setBlogs, blogToggleRef }) => {
     const [author, setAuthor] = useState('')
     const [url, setUrl] = useState('')
     const [title, setTitle] = useState('')
@@ -25,6 +25,7 @@ const BlogForm = ({ setErrorMessage, setBlogs }) => {
             setTitle('')
             setBlogs((prevState) => [...prevState,blog])
             setErrorMessage('A new Blog has beed added!')
+            blogToggleRef.current.toggleVisibility()
             setTimeout(() => {
                 setErrorMessage('')
             }, 3000);
